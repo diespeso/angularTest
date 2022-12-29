@@ -14,6 +14,11 @@ import { HealthCheckerService } from './health-checker/health-checker.service';
 import { ProductItemNewComponent } from './product/product-item-new/product-item-new.component';
 
 import { FormsModule } from '@angular/forms';
+import { ProductViewComponent } from './product/product-view/product-view.component';
+
+import { MatSlideToggleModule } from '@angular/material';
+import { MatToolbarModule} from '@angular/material';
+import { MatCard, MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -22,13 +27,17 @@ import { FormsModule } from '@angular/forms';
     ProductItemComponent,
     ProductListComponent,
     HealthCheckerComponent,
-    ProductItemNewComponent
+    ProductItemNewComponent,
+    ProductViewComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSlideToggleModule, // https://stackoverflow.com/questions/61079125/mattoolbar-throws-error-when-using-it-with-angular-9
+    MatToolbarModule,
+    MatCardModule,
   ],
   providers: [ProductService, HealthCheckerService],
   bootstrap: [AppComponent]

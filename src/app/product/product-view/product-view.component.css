@@ -1,0 +1,55 @@
+.product-main-container {
+    /*grid-column: 1 / 7;
+    grid-row: 1 / 5; */
+    grid-area: a;
+}
+
+.product-view {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-areas: 
+    "a a a a a a b b"
+    "a a a a a a b b"
+    "a a a a a a b b"
+    "a a a a a a b b"
+    "a a a a a a b b";
+}
+
+.product-container-left {
+    background-color: black;
+}
+
+mat-card-content {
+    background: grey;
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: 
+    "a a b b"
+    "a a b b"
+    "a a b b";
+}
+
+.image-area {
+    grid-area: a;
+}
+
+mat-card-content img {
+    grid-column: 1 / 4;
+    grid-row: 2 / 4;
+    grid-area: a;
+    width: 100%;
+}
+
+
+.image-side-area {
+    background-color: orange;
+    grid-area: b;
+}
+
+.image-side-area .score-section {
+    background-color: lightblue;
+    grid-row: 2;
+}

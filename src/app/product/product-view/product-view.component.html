@@ -1,0 +1,22 @@
+<div class="product-view">
+    <mat-card class="product-main-container">
+        <mat-card-title>{{this.product.name}}</mat-card-title>
+        <mat-card-content>
+            <div class="image-area">
+                <img src="{{this.product.imageUrl}}">
+                <h2>${{this.product.price.toFixed(2)}}</h2>
+            </div>
+            <div class="image-side-area">
+                <div class="score-section">
+                    a
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-footer>
+            i am footer
+        </mat-card-footer>
+    </mat-card>
+    <!-- <mat-slide-toggle>Toggle me!</mat-slide-toggle> -->
+    <!-- <app-product-item [product]="this.product"></app-product-item> -->
+
+</div>
