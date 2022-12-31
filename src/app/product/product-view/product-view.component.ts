@@ -12,6 +12,8 @@ import { ProductService } from '../product.service';
 export class ProductViewComponent implements OnInit {
 
   public product: Product;
+  public productReviewsAverage: number;
+  public productReviewsCount: number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,7 +31,7 @@ export class ProductViewComponent implements OnInit {
           error: (err) => {
             console.log('error: ', err);
           },
-        })
+        });
       }
     });
   }

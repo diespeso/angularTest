@@ -1,0 +1,7 @@
+<div class="review-list-container">
+    <cdk-virtual-scroll-viewport [itemSize]="48" style="height: 200px;">
+        <div *cdkVirtualFor="let review of this.reviews">
+            <app-product-review-item [review]="review"></app-product-review-item>
+        </div>
+    </cdk-virtual-scroll-viewport>
+</div>
