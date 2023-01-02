@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ProductImage } from 'src/app/model/product-image.model';
 
 import { Product } from 'src/app/model/product';
 import { ProductService } from '../product.service';
@@ -12,6 +13,7 @@ import { ProductService } from '../product.service';
 export class ProductViewComponent implements OnInit {
 
   public product: Product;
+  public productImages: ProductImage[];
   public productReviewsAverage: number;
   public productReviewsCount: number;
 
@@ -32,6 +34,16 @@ export class ProductViewComponent implements OnInit {
             console.log('error: ', err);
           },
         });
+
+        this.productService.getProductoImages(id).subscribe({
+          next: (res) => {
+            this.productImages = res;
+            console.log('here images:', this.productImages);
+          },
+          error: (err) => {
+            console.log('error: ', err);
+          }
+        })
       }
     });
   }

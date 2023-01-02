@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from '../model/product';
+import { ProductImage } from '../model/product-image.model';
+import { ReadProductImageFullDto } from '../dto/read-product-image-full';
 
 export interface IApiResponse {
   data: any,
@@ -31,10 +33,17 @@ export class ProductService {
   }
 
   getProducto(productId: number): Observable<Product> {
-    console.log('productId', productId);
     return this.http
       .get<IApiResponse>(`${this.apiURL}/${productId}`)
       .pipe(map(val => val.data));
+  }
+
+  getProductoImages(productId: number): Observable<ProductImage[]> {
+    return this.http
+      .get<IApiResponse>(`${this.apiURL}/${productId}/images?full=true`)
+      .pipe(map(val => ( // TODO: use a dto
+        val.data.map((imageData: ReadProductImageFullDto) => ({ ...imageData.image, isMain: imageData.isMain })) 
+      )));
   }
 
   updateProduct(product: Product): Observable<Product> {

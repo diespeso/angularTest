@@ -34,15 +34,24 @@ mat-card-content {
 
 .image-area {
     grid-area: a;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas:
+    "a b b b b";
 }
 
+.image-area img {
+    grid-area: b;
+    width: 100%;
+}
+/*
 mat-card-content img {
     grid-column: 1 / 4;
     grid-row: 2 / 4;
     grid-area: a;
     width: 100%;
 }
-
+*/
 
 .image-side-area {
     background-color: orange;
@@ -50,6 +59,9 @@ mat-card-content img {
 }
 
 .image-side-area .score-section {
-    background-color: lightblue;
     grid-row: 2;
+}
+
+.image-carrousel {
+    background: red;
 }
