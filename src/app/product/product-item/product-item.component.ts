@@ -5,6 +5,7 @@ import { UpdateProduct } from '../../dto/update-product';
 import { ProductService } from '../product.service';
 
 import { lastValueFrom } from 'rxjs';
+import { IAnyProduct, IProductImage } from 'src/app/model/product.interface';
 
 @Component({
   selector: 'app-product-item',
@@ -13,7 +14,7 @@ import { lastValueFrom } from 'rxjs';
 })
 export class ProductItemComponent implements OnInit {
 
-  @Input() public product: Product;
+  @Input() public product: IProductImage;
   public classes: any;
 
   constructor(
@@ -24,6 +25,7 @@ export class ProductItemComponent implements OnInit {
     this.classes = {
       onSale: false,
     }
+    console.log('testing inside: ', this.product);
   }
 
   onSubmit(): void {

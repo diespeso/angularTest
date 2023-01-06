@@ -6,7 +6,7 @@
 
 .product-view {
     display: grid;
-    gap: 10px;
+    gap: 100px;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
     grid-template-areas: 
@@ -21,8 +21,11 @@
     background-color: black;
 }
 
+mat-card {
+    background: lightgrey;
+}
+
 mat-card-content {
-    background: grey;
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
@@ -34,6 +37,7 @@ mat-card-content {
 
 .image-area {
     grid-area: a;
+    background-color: #eaeaea;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-areas:
@@ -42,7 +46,11 @@ mat-card-content {
 
 .image-area img {
     grid-area: b;
-    width: 100%;
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 /*
 mat-card-content img {
@@ -54,7 +62,7 @@ mat-card-content img {
 */
 
 .image-side-area {
-    background-color: orange;
+    /*background-color: orange; */
     grid-area: b;
 }
 
@@ -63,5 +71,5 @@ mat-card-content img {
 }
 
 .image-carrousel {
-    background: red;
+    /* background: red; */
 }

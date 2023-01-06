@@ -14,6 +14,7 @@ export class ProductViewComponent implements OnInit {
 
   public product: Product;
   public productImages: ProductImage[];
+  public mainProductImage: ProductImage;
   public productReviewsAverage: number;
   public productReviewsCount: number;
 
@@ -34,10 +35,11 @@ export class ProductViewComponent implements OnInit {
             console.log('error: ', err);
           },
         });
-
+        console.log('getting data for: ', id);
         this.productService.getProductoImages(id).subscribe({
-          next: (res) => {
+          next: (res: ProductImage[]) => {
             this.productImages = res;
+            this.mainProductImage = this.productImages.find(productImage => productImage.isMain)!;
             console.log('here images:', this.productImages);
           },
           error: (err) => {
@@ -46,6 +48,13 @@ export class ProductViewComponent implements OnInit {
         })
       }
     });
+  }
+
+  handleChangeMainImageDisplay(event: Event): void {
+    const selectedId: number = parseInt((event.target as HTMLImageElement).id, 10);
+    console.log('event: ', (event.target as HTMLImageElement)); // TODO: estudiar este caso de casting
+    // de un objeto a una interfaz (para product image y eso)
+    this.mainProductImage = this.productImages[selectedId];
   }
 
 }

@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { Product } from '../model/product';
 import { ProductImage } from '../model/product-image.model';
 import { ReadProductImageFullDto } from '../dto/read-product-image-full';
+import { IAnyProduct, IProductImage } from '../model/product.interface';
 
 export interface IApiResponse {
   data: any,
@@ -32,6 +33,12 @@ export class ProductService {
       .pipe(map((val) => val.data));
   }
 
+  getProductsWithImage(): Observable<IProductImage[]> {
+    return this.http
+      .get<IApiResponse>(`${this.apiURL}?with_main_image=true`)
+      .pipe(map((val) => val.data));
+  }
+
   getProducto(productId: number): Observable<Product> {
     return this.http
       .get<IApiResponse>(`${this.apiURL}/${productId}`)
@@ -39,10 +46,11 @@ export class ProductService {
   }
 
   getProductoImages(productId: number): Observable<ProductImage[]> {
+    console.log('getting product images: ', productId);
     return this.http
-      .get<IApiResponse>(`${this.apiURL}/${productId}/images?full=true`)
+      .get<IApiResponse>(`${this.apiURL}/${productId}/images`)
       .pipe(map(val => ( // TODO: use a dto
-        val.data.map((imageData: ReadProductImageFullDto) => ({ ...imageData.image, isMain: imageData.isMain })) 
+        val.data.map((imageData: ReadProductImageFullDto) => (imageData)) 
       )));
   }
 
@@ -55,7 +63,7 @@ export class ProductService {
       .pipe(map((val => val.data)))
   }
 
-  createProduct(product: Product): Observable<Product> {
+  createProduct(product: Product): Observable<IAnyProduct> {
     return this.http
       .post<IApiResponse>(
         `${this.apiURL}`,

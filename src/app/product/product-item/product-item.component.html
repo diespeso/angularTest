@@ -1,6 +1,6 @@
 <div class="product-container" [ngClass]="classes">
   <div>
-    <img class="image" [src]="product.imageUrl">
+    <img class="image" [src]="product.image?.url">
   </div>
   <div class="name"><b>{{product.name}}</b></div>
   <div class="price">$ {{product.price}}</div>

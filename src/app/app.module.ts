@@ -16,9 +16,9 @@ import { ProductItemNewComponent } from './product/product-item-new/product-item
 import { FormsModule } from '@angular/forms';
 import { ProductViewComponent } from './product/product-view/product-view.component';
 
-import { MatSlideToggleModule } from '@angular/material';
-import { MatToolbarModule} from '@angular/material';
-import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule, MatToolbarModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 import { ProductReviewsViewComponent } from './product/product-reviews-view/product-reviews-view.component';
 import { ProductReviewItemComponent } from './product/product-review-item/product-review-item.component';
 
@@ -42,6 +42,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     FormsModule,
     AppRoutingModule,
     MatSlideToggleModule, // https://stackoverflow.com/questions/61079125/mattoolbar-throws-error-when-using-it-with-angular-9
+    MatButtonModule,
     MatToolbarModule,
     MatCardModule,
     ScrollingModule,

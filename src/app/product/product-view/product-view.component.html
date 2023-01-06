@@ -4,12 +4,27 @@
         <mat-card-content>
             <div class="image-area">
                 <div class="image-carrousel">
-                    <img *ngFor="let productImage of this.productImages;" src="{{productImage.url}}">
+                    <a
+                    href="javascript:void(0);"
+                    *ngFor="let productImage of this.productImages; let id = index"
+                    (click)="handleChangeMainImageDisplay($event)"
+                    >
+                        <img
+                        id="{{id}}"
+                        src="{{productImage.url}}"
+                        alt="image gallery item"
+                        >
+                    </a>
                 </div>
-                <img src="{{this.product.imageUrl}}">
+                <img src="{{this.mainProductImage.url}}">
             </div>
-            <div style="background-color: brown;">
-                <h2>${{this.product.price.toFixed(2)}}</h2>
+            <div>
+                <h2>MXN. ${{this.product.price.toFixed(2)}}</h2>
+            </div>
+            <div>
+                <p>
+                    {{product.description}}
+                </p>
             </div>
             <div class="image-side-area">
                 <div class="score-section">
@@ -20,6 +35,9 @@
         <mat-card-footer>
             i am footer
         </mat-card-footer>
+        <label>Amount</label>
+        
+        <button mat-raised-button color="primary" (click)="handleAddToCart($event)"> Add to cart</button>
     </mat-card>
     <!-- <mat-slide-toggle>Toggle me!</mat-slide-toggle> -->
     <!-- <app-product-item [product]="this.product"></app-product-item> -->
