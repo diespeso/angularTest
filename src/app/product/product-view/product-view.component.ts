@@ -4,6 +4,9 @@ import { ProductImage } from 'src/app/model/product-image.model';
 
 import { Product } from 'src/app/model/product';
 import { ProductService } from '../product.service';
+import { DialogAddedProductComponent } from 'src/app/shopping-cart/dialog-added-product/dialog-added-product.component';
+
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-view',
@@ -18,10 +21,17 @@ export class ProductViewComponent implements OnInit {
   public productReviewsAverage: number;
   public productReviewsCount: number;
 
+  public maxSelectableAmount: number;
+  public ngSelect: number;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
-    ) { }
+    public dialog: MatDialog,
+    ) {
+      this.maxSelectableAmount = 30;
+      this.ngSelect = 1;
+    }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((paramObj) => {
@@ -55,6 +65,20 @@ export class ProductViewComponent implements OnInit {
     console.log('event: ', (event.target as HTMLImageElement)); // TODO: estudiar este caso de casting
     // de un objeto a una interfaz (para product image y eso)
     this.mainProductImage = this.productImages[selectedId];
+  }
+
+  handleAddToCart(event: Event): void {
+    console.log('im adding this to a cart"!');
+    this.openAddedShoppingCartDialog();
+  }
+
+  openAddedShoppingCartDialog() {
+    const dialogRef = this.dialog.open(DialogAddedProductComponent);
+    dialogRef.componentInstance.success = true; // TODO: good point to start using rxjs (the other one for states)
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('ended');
+    });
   }
 
 }

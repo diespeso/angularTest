@@ -39,6 +39,12 @@ export class ProductService {
       .pipe(map((val) => val.data));
   }
 
+  getProductWithImage(productId: number): Observable<IProductImage> {
+    return this.http
+      .get<IApiResponse>(`${this.apiURL}/${productId}?with_main_image=true`)
+      .pipe(map((val) => val.data));
+  }
+
   getProducto(productId: number): Observable<Product> {
     return this.http
       .get<IApiResponse>(`${this.apiURL}/${productId}`)

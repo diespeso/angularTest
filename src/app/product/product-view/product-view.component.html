@@ -35,8 +35,13 @@
         <mat-card-footer>
             i am footer
         </mat-card-footer>
-        <label>Amount</label>
         
+        <mat-form-field [style.width.px]="100">
+            <mat-label>Amount</mat-label>
+            <mat-select [(ngModel)]="ngSelect">
+                <mat-option *ngFor="let _i of [].constructor(this.maxSelectableAmount); let selectAmount = index;" [value]="selectAmount">{{selectAmount}}</mat-option>
+            </mat-select>
+        </mat-form-field>
         <button mat-raised-button color="primary" (click)="handleAddToCart($event)"> Add to cart</button>
     </mat-card>
     <!-- <mat-slide-toggle>Toggle me!</mat-slide-toggle> -->

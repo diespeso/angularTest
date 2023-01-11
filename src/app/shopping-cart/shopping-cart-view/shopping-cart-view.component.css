@@ -1,0 +1,23 @@
+.shopping-cart-view-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-areas: "a a b b b b b b b b";
+    grid-gap: 40px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.shopping-cart-list-container {
+    grid-area: a;
+}
+
+.test-shopping-cart-select {
+    background-color: lightgrey;
+    text-decoration: none;
+}
+
+.shopping-cart-content-container {
+    grid-area: b;
+}
+
+

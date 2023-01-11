@@ -1,0 +1,19 @@
+<mat-card class="container">
+    <div class="image-container">
+        <img src={{this.imageProduct.image.url}} alt="generic alt text">
+    </div>
+    <div class="info-container">
+        <div><a href="/products/{{this.imageProduct.id}}" target="__blank">{{this.imageProduct.name}}</a></div>
+        <div>
+            <span *ngFor="let score of [].constructor(this.shoppingCartProduct.scoreAverage)">⭐</span>
+        </div>
+        <!-- TODO: code reusable from product-view-->
+        <mat-form-field [style.width.px]="100">
+            <mat-label>Amount</mat-label>
+            <mat-select [(ngModel)]="this.editAmount">
+                <mat-option *ngFor="let _i of [].constructor(this.maxSelectableAmount); let selectAmount = index;" [value]="selectAmount">{{selectAmount}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="price-tag">${{this.imageProduct.price.toFixed(2)}}</div>
+    </div>
+</mat-card>

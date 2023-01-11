@@ -70,6 +70,6 @@ mat-card-content img {
     grid-row: 2;
 }
 
-.image-carrousel {
-    /* background: red; */
+mat-form-field {
+    margin: 10px;
 }
