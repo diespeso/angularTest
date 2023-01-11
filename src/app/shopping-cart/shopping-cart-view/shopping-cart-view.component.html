@@ -1,0 +1,16 @@
+<mat-card class="shopping-cart-view-container">
+    <div class="shopping-cart-list-container">
+        <h3>Your lists</h3>
+        <a href="#">
+            <mat-card class="test-shopping-cart-select">
+                I am a list
+            </mat-card>
+        </a>
+    </div>
+    <div class="shopping-cart-content-container">
+        <div *ngFor="let shoppingCartProduct of this.shoppingCartProducts">
+            <!-- <app-product-item [product]="shoppingCartProduct.product"></app-product-item> -->
+            <app-product-cart-item [shoppingCartProduct]="shoppingCartProduct"></app-product-cart-item>
+        </div>
+    </div>
+</mat-card>

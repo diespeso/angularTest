@@ -1,0 +1,10 @@
+mat-dialog-container {
+    background-color: red;
+}
+
+.container {
+    background-color: yellow;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+}

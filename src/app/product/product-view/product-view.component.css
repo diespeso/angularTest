@@ -6,7 +6,7 @@
 
 .product-view {
     display: grid;
-    gap: 10px;
+    gap: 100px;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
     grid-template-areas: 
@@ -21,8 +21,11 @@
     background-color: black;
 }
 
+mat-card {
+    background: lightgrey;
+}
+
 mat-card-content {
-    background: grey;
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
@@ -34,22 +37,39 @@ mat-card-content {
 
 .image-area {
     grid-area: a;
+    background-color: #eaeaea;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas:
+    "a b b b b";
 }
 
+.image-area img {
+    grid-area: b;
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+/*
 mat-card-content img {
     grid-column: 1 / 4;
     grid-row: 2 / 4;
     grid-area: a;
     width: 100%;
 }
-
+*/
 
 .image-side-area {
-    background-color: orange;
+    /*background-color: orange; */
     grid-area: b;
 }
 
 .image-side-area .score-section {
-    background-color: lightblue;
     grid-row: 2;
+}
+
+mat-form-field {
+    margin: 10px;
 }

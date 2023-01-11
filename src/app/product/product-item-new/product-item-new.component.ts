@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 import { Product } from 'src/app/model/product';
+import { IAnyProduct, IProductImage } from 'src/app/model/product.interface';
 import { ProductService, IApiResponse } from '../product.service';
 
 @Component({
@@ -10,12 +11,13 @@ import { ProductService, IApiResponse } from '../product.service';
 })
 export class ProductItemNewComponent implements OnInit {
 
-  private product: Product;
+  private product: IProductImage;
 
   public name: string;
+  public description: string;
   public price: number;
 
-  @Output() newProductEvent: EventEmitter<Product>;
+  @Output() newProductEvent: EventEmitter<IProductImage>;
 
   constructor(private productService: ProductService) {
     this.newProductEvent = new EventEmitter();
@@ -25,13 +27,14 @@ export class ProductItemNewComponent implements OnInit {
   }
 
   onSave(): void {
-    const newProduct: Product = new Product(null, '', this.name, this.price);
+    const newProduct: Product = new Product(null, this.name, this.description, this.price);
     this.saveNewProduct(newProduct);
   }
 
   saveNewProduct(newProduct: Product): void {
+    console.log('check this:', newProduct);
     this.productService.createProduct(newProduct).subscribe({
-      next: (product: Product) => {
+      next: (product: IAnyProduct) => {
         this.product = product; // update parent with this, usar output
         this.newProductEvent.emit(this.product);
       },

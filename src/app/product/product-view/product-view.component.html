@@ -3,8 +3,28 @@
         <mat-card-title>{{this.product.name}}</mat-card-title>
         <mat-card-content>
             <div class="image-area">
-                <img src="{{this.product.imageUrl}}">
-                <h2>${{this.product.price.toFixed(2)}}</h2>
+                <div class="image-carrousel">
+                    <a
+                    href="javascript:void(0);"
+                    *ngFor="let productImage of this.productImages; let id = index"
+                    (click)="handleChangeMainImageDisplay($event)"
+                    >
+                        <img
+                        id="{{id}}"
+                        src="{{productImage.url}}"
+                        alt="image gallery item"
+                        >
+                    </a>
+                </div>
+                <img src="{{this.mainProductImage.url}}">
+            </div>
+            <div>
+                <h2>MXN. ${{this.product.price.toFixed(2)}}</h2>
+            </div>
+            <div>
+                <p>
+                    {{product.description}}
+                </p>
             </div>
             <div class="image-side-area">
                 <div class="score-section">
@@ -15,6 +35,14 @@
         <mat-card-footer>
             i am footer
         </mat-card-footer>
+        
+        <mat-form-field [style.width.px]="100">
+            <mat-label>Amount</mat-label>
+            <mat-select [(ngModel)]="ngSelect">
+                <mat-option *ngFor="let _i of [].constructor(this.maxSelectableAmount); let selectAmount = index;" [value]="selectAmount">{{selectAmount}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="handleAddToCart($event)"> Add to cart</button>
     </mat-card>
     <!-- <mat-slide-toggle>Toggle me!</mat-slide-toggle> -->
     <!-- <app-product-item [product]="this.product"></app-product-item> -->

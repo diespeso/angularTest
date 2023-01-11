@@ -3,7 +3,6 @@
     display: grid;
     grid-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
     padding: 10px;
 }
 
@@ -11,4 +10,8 @@
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 15px;
+}
+
+mat-card {
+    margin: 10px;
 }

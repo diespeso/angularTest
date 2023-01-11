@@ -14,6 +14,7 @@ export class ProductReviewItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('review: ', this.review);
   }
 
 }
