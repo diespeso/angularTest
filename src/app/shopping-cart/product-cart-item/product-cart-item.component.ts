@@ -2,6 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { ShoppingCartProduct } from 'src/app/model/shopping-cart-product.interface';
 import { IProductImage } from 'src/app/model/product.interface';
+import { MatSelectChange } from '@angular/material/select';
+
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/selectors/shopping-cart.selectors';
+
+import { updateShoppingCartProduct } from 'src/app/store/actions/shopping-cart.action';
+
 @Component({
   selector: 'app-product-cart-item',
   templateUrl: './product-cart-item.component.html',
@@ -14,14 +21,23 @@ export class ProductCartItemComponent implements OnInit {
   public editAmount: number;
   public maxSelectableAmount: number;
 
-  constructor() {
+  constructor(
+    private store: Store<AppState>,
+  ) {
   }
 
   ngOnInit(): void {
     this.imageProduct = this.shoppingCartProduct.product;
     this.editAmount = this.shoppingCartProduct.amount;
-    console.log(this.shoppingCartProduct.amount);
     this.maxSelectableAmount = 30;
+  }
+
+  onSelectorChange(event: MatSelectChange): void {
+    this.shoppingCartProduct = {
+      ...this.shoppingCartProduct,
+      amount: event.value,
+    };
+    this.store.dispatch(updateShoppingCartProduct({ payload: this.shoppingCartProduct }));
   }
 
 }

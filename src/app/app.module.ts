@@ -32,6 +32,11 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ShoppingCartViewComponent } from './shopping-cart/shopping-cart-view/shopping-cart-view.component';
 import { ProductCartItemComponent } from './shopping-cart/product-cart-item/product-cart-item.component';
 import { DialogAddedProductComponent } from './shopping-cart/dialog-added-product/dialog-added-product.component';
+import { StoreModule } from '@ngrx/store';
+
+import { shoppingCartReducer } from './store/reducers/shopping-cart.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ShoppingCartEffects } from './store/effects/shopping-cart.effects';
 
 @NgModule({
   declarations: [
@@ -63,6 +68,10 @@ import { DialogAddedProductComponent } from './shopping-cart/dialog-added-produc
     MatCardModule,
     ScrollingModule,
     ReactiveFormsModule,
+    StoreModule.forRoot({
+      shoppingCart: shoppingCartReducer, // TODO: se puede empaquetar todo
+    }, {}),
+    EffectsModule.forRoot([ShoppingCartEffects]),
   ],
   providers: [ProductService, HealthCheckerService],
   bootstrap: [AppComponent]

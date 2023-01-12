@@ -10,8 +10,8 @@ import { ProductImage } from '../model/product-image.model';
 import { ReadProductImageFullDto } from '../dto/read-product-image-full';
 import { IAnyProduct, IProductImage } from '../model/product.interface';
 
-export interface IApiResponse {
-  data: any,
+export interface IApiResponse<T = any> {
+  data: T,
   error: boolean,
   info: any,
   message: string,
@@ -29,25 +29,25 @@ export class ProductService {
 
   getProductos(): Observable<Product[]> {
     return this.http
-      .get<IApiResponse>(this.apiURL)
+      .get<IApiResponse<Product[]>>(this.apiURL)
       .pipe(map((val) => val.data));
   }
 
   getProductsWithImage(): Observable<IProductImage[]> {
     return this.http
-      .get<IApiResponse>(`${this.apiURL}?with_main_image=true`)
+      .get<IApiResponse<IProductImage[]>>(`${this.apiURL}?with_main_image=true`)
       .pipe(map((val) => val.data));
   }
 
   getProductWithImage(productId: number): Observable<IProductImage> {
     return this.http
-      .get<IApiResponse>(`${this.apiURL}/${productId}?with_main_image=true`)
+      .get<IApiResponse<IProductImage>>(`${this.apiURL}/${productId}?with_main_image=true`)
       .pipe(map((val) => val.data));
   }
 
   getProducto(productId: number): Observable<Product> {
     return this.http
-      .get<IApiResponse>(`${this.apiURL}/${productId}`)
+      .get<IApiResponse<Product>>(`${this.apiURL}/${productId}`)
       .pipe(map(val => val.data));
   }
 
@@ -62,7 +62,7 @@ export class ProductService {
 
   updateProduct(product: Product): Observable<Product> {
     return this.http
-      .patch<IApiResponse>(
+      .patch<IApiResponse<Product>>(
         `${this.apiURL}/${product.id}`,
         product,
       )

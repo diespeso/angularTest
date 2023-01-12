@@ -8,6 +8,9 @@ import { DialogAddedProductComponent } from 'src/app/shopping-cart/dialog-added-
 
 import { MatDialog } from '@angular/material/dialog';
 
+import { Store, select } from '@ngrx/store';
+import { AppState, selectShoppingCart } from 'src/app/store/selectors/shopping-cart.selectors';
+
 @Component({
   selector: 'app-product-view',
   templateUrl: './product-view.component.html',
@@ -28,12 +31,17 @@ export class ProductViewComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     public dialog: MatDialog,
+    private store: Store<AppState>,
     ) {
       this.maxSelectableAmount = 30;
       this.ngSelect = 1;
     }
 
   ngOnInit(): void {
+    this.store.select(selectShoppingCart).subscribe((shoppingCartState) => {
+      console.log('this is the shopping cart right here', shoppingCartState);
+    });
+
     this.activatedRoute.params.subscribe((paramObj) => {
       const id: number = paramObj['id'];
       if (id) {

@@ -8,6 +8,8 @@ import { ShoppingCart } from '../model/shopping-cart.model';
 import { IApiResponse } from '../product/product.service';
 import { map } from 'rxjs/operators';
 
+import { ShoppingCartProduct } from '../model/shopping-cart-product.interface';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +22,14 @@ export class ShoppingCartService {
   ) { }
 
   getShoppingCart(): Observable<ShoppingCart[]> {
-    return this.http.get<IApiResponse>(this.apiURL)
+    return this.http.get<IApiResponse<ShoppingCart[]>>(this.apiURL)
       .pipe(map((val) => val.data));
+  }
+
+  updateShoppingCartProduct(shoppingCartProduct: ShoppingCartProduct): Observable<ShoppingCartProduct> {
+    return this.http.patch<IApiResponse<ShoppingCartProduct>>(`${this.apiURL}/${shoppingCartProduct.id}`, shoppingCartProduct)
+      .pipe(map((res: IApiResponse<ShoppingCartProduct>) => {
+        return res.data;
+      }));
   }
 }

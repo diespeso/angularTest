@@ -10,7 +10,7 @@
         <!-- TODO: code reusable from product-view-->
         <mat-form-field [style.width.px]="100">
             <mat-label>Amount</mat-label>
-            <mat-select [(ngModel)]="this.editAmount">
+            <mat-select [(ngModel)]="this.editAmount" (selectionChange)="onSelectorChange($event)">
                 <mat-option *ngFor="let _i of [].constructor(this.maxSelectableAmount); let selectAmount = index;" [value]="selectAmount">{{selectAmount}}</mat-option>
             </mat-select>
         </mat-form-field>
