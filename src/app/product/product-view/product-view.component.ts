@@ -6,10 +6,11 @@ import { Product } from 'src/app/model/product';
 import { ProductService } from '../product.service';
 import { DialogAddedProductComponent } from 'src/app/shopping-cart/dialog-added-product/dialog-added-product.component';
 
-import { MatDialog } from '@angular/material/dialog';
-
 import { Store, select } from '@ngrx/store';
 import { AppState, selectShoppingCart } from 'src/app/store/selectors/shopping-cart.selectors';
+import { createShoppingCartProduct } from 'src/app/store/actions/shopping-cart.action';
+
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 @Component({
   selector: 'app-product-view',
@@ -30,17 +31,14 @@ export class ProductViewComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
-    public dialog: MatDialog,
     private store: Store<AppState>,
+    private localStorageService: LocalstorageService,
     ) {
       this.maxSelectableAmount = 30;
       this.ngSelect = 1;
     }
 
   ngOnInit(): void {
-    this.store.select(selectShoppingCart).subscribe((shoppingCartState) => {
-      console.log('this is the shopping cart right here', shoppingCartState);
-    });
 
     this.activatedRoute.params.subscribe((paramObj) => {
       const id: number = paramObj['id'];
@@ -53,12 +51,10 @@ export class ProductViewComponent implements OnInit {
             console.log('error: ', err);
           },
         });
-        console.log('getting data for: ', id);
         this.productService.getProductoImages(id).subscribe({
           next: (res: ProductImage[]) => {
             this.productImages = res;
             this.mainProductImage = this.productImages.find(productImage => productImage.isMain)!;
-            console.log('here images:', this.productImages);
           },
           error: (err) => {
             console.log('error: ', err);
@@ -77,16 +73,22 @@ export class ProductViewComponent implements OnInit {
 
   handleAddToCart(event: Event): void {
     console.log('im adding this to a cart"!');
-    this.openAddedShoppingCartDialog();
+    this.store.dispatch(createShoppingCartProduct({ payload: { product_id: this.product.id!, amount: this.ngSelect }}));
   }
 
-  openAddedShoppingCartDialog() {
-    const dialogRef = this.dialog.open(DialogAddedProductComponent);
+  openAddedShoppingCartDialog() {    
+    /*const dialogRef = this.dialog.open(DialogAddedProductComponent);
     dialogRef.componentInstance.success = true; // TODO: good point to start using rxjs (the other one for states)
 
     dialogRef.afterClosed().subscribe((result: any) => {
       console.log('ended');
-    });
+    });*/
+  }
+
+  canAddToShoppingCart(): boolean {
+    const exists = this.localStorageService.getProductFromShoppingCartByProductId(this.product.id!);
+    console.log(exists);
+    return  exists === undefined;
   }
 
 }

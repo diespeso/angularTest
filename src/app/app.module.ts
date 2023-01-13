@@ -24,6 +24,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { ProductReviewsViewComponent } from './product/product-reviews-view/product-reviews-view.component';
 import { ProductReviewItemComponent } from './product/product-review-item/product-review-item.component';
@@ -65,6 +66,7 @@ import { ShoppingCartEffects } from './store/effects/shopping-cart.effects';
     MatFormFieldModule,
     MatToolbarModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatCardModule,
     ScrollingModule,
     ReactiveFormsModule,

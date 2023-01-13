@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import {
     addProduct, removeProduct, reset, getAllShoppingCartProductsSuccess,
     updateShoppingCartProduct, updateShoppingCartProductSuccess,
+    deleteShoppingCartProduct, deleteShoppingCartProductSuccess,
 } from '../actions/shopping-cart.action';
 
 import { ShoppingCartProduct } from 'src/app/model/shopping-cart-product.interface';
@@ -16,6 +17,14 @@ export const shoppingCartReducer = createReducer(
         return state.map((val: ShoppingCartProduct) => {
             if (val.id === payload.id) {
                 return { ...payload, product: val.product, scoreAverage: val.scoreAverage };
+            }
+            return val;
+        });
+    }),
+    on(deleteShoppingCartProductSuccess, (state, { payload }) => {
+        return state.flatMap((val: ShoppingCartProduct) => {
+            if(val.id === payload.id) {
+                return [];
             }
             return val;
         });

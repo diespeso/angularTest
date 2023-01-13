@@ -42,7 +42,7 @@
                 <mat-option *ngFor="let _i of [].constructor(this.maxSelectableAmount); let selectAmount = index;" [value]="selectAmount">{{selectAmount}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="handleAddToCart($event)"> Add to cart</button>
+        <button mat-raised-button color="primary" [disabled]="!canAddToShoppingCart()" (click)="handleAddToCart($event)"> Add to cart</button>
     </mat-card>
     <!-- <mat-slide-toggle>Toggle me!</mat-slide-toggle> -->
     <!-- <app-product-item [product]="this.product"></app-product-item> -->

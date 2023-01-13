@@ -7,7 +7,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/selectors/shopping-cart.selectors';
 
-import { updateShoppingCartProduct } from 'src/app/store/actions/shopping-cart.action';
+import { updateShoppingCartProduct, deleteShoppingCartProduct } from 'src/app/store/actions/shopping-cart.action';
 
 @Component({
   selector: 'app-product-cart-item',
@@ -32,12 +32,16 @@ export class ProductCartItemComponent implements OnInit {
     this.maxSelectableAmount = 30;
   }
 
-  onSelectorChange(event: MatSelectChange): void {
+  onAmountSelectorChange(event: MatSelectChange): void {
     this.shoppingCartProduct = {
       ...this.shoppingCartProduct,
       amount: event.value,
     };
     this.store.dispatch(updateShoppingCartProduct({ payload: this.shoppingCartProduct }));
+  }
+
+  handleDeletion(event: Event): void {
+    this.store.dispatch(deleteShoppingCartProduct({ payload: this.shoppingCartProduct }));
   }
 
 }

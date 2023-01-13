@@ -25,6 +25,21 @@ export const reset = createAction(
     '[ShoppingCart Component] Reset'
 );
 
+export const createShoppingCartProduct = createAction(
+    '[ShoppingCart Component] createShoppingCartProduct',
+    props<{ payload: { product_id: number, amount: number } }>(), //TODO: dto?
+);
+
+export const createShoppingCartProductSuccess = createAction(
+    '[ShoppingCart Component] createShoppingCartProductSuccess',
+    props<{ payload: ShoppingCartProduct }>(),
+);
+
+export const createShoppingCartProductFailure = createAction(
+    '[ShoppingCart Component] createShoppingCartProductFailure',
+    props<{ error: any }>(),
+)
+
 export const updateShoppingCartProduct = createAction(
     '[ShoppingCart Component] updateShoppingCartProduct',
     props<{ payload: ShoppingCartProduct }>()
@@ -37,6 +52,21 @@ export const updateShoppingCartProductSuccess = createAction(
 
 export const updateShoppingCartproductFailure = createAction(
     '[ShoppingCart Component] updateShoppingCartProductFailure',
+    props<{ error: any }>(),
+);
+
+export const deleteShoppingCartProduct = createAction(
+    '[ShoppingCart Component] deleteShoppingCartProduct',
+    props<{ payload: ShoppingCartProduct }>(),
+);
+
+export const deleteShoppingCartProductSuccess = createAction(
+    '[ShoppingCart Component] deleteShoppingCartProductSuccess',
+    props<{ payload: ShoppingCartProduct }>(),
+);
+
+export const deleteShoppingCartProductFailure = createAction(
+    '[ShoppingCart Component] deleteShoppingCartProductFailure',
     props<{ error: any }>(),
 );
 

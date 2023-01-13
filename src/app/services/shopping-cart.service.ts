@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ShoppingCart } from '../model/shopping-cart.model';
@@ -31,5 +31,22 @@ export class ShoppingCartService {
       .pipe(map((res: IApiResponse<ShoppingCartProduct>) => {
         return res.data;
       }));
+  }
+
+  deleteShoppingCartProduct(shoppingCartProduct: ShoppingCartProduct): Observable<IApiResponse> {
+    return this.http.delete<IApiResponse>(`${this.apiURL}/${shoppingCartProduct.id}`, { observe: 'response' })
+      .pipe(map((res: HttpResponse<IApiResponse>) => {
+        console.log(res.status);
+        if (res.status !== 200) {
+          throw new Error('failed to delete shopping cart product!');
+        }
+        console.log('didnt fail');
+        return res.body as IApiResponse;
+      }));
+  }
+
+  postShoppingCartProduct(shoppingCartProduct: { product_id: number, amount: number }): Observable<ShoppingCartProduct> {
+    return this.http.post<IApiResponse>(this.apiURL, shoppingCartProduct)
+      .pipe(map((res: IApiResponse) => res.data));
   }
 }
