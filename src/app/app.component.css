@@ -1,0 +1,37 @@
+div {
+    margin: 20px;
+    padding: 50px;
+}
+
+mat-toolbar {
+    position: fixed;
+    background-color: #cccccc;
+    top: 0px;
+    left: 0px;
+}
+
+.toolbar-normal {
+    margin-left: 10px;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.toolbar-normal:hover {
+    background-color: lightgray;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.toolbar-shopping-cart {
+    padding: 5px;
+    text-decoration: none ;
+    position: absolute;
+    right: 0px;
+    margin-right: 40px;
+}
+
+.toolbar-shopping-cart:hover {
+    background-color: lightgray;
+    border-radius: 10px;
+    padding: 5px;
+}
