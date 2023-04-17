@@ -32,37 +32,8 @@ export class ShoppingCartViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      /*const products = this.shoppingCartService.getShoppingCart().subscribe({
-        next: (res: ShoppingCart[]) => {
-          res.forEach((shoppingCartProduct: ShoppingCart) => {
-            this.productService.getProductWithImage(shoppingCartProduct.product_id).subscribe({
-              next: (res: IProductImage) => {
-                this.productReviewService.getProductReviews(res.id!).subscribe({
-                  next: (resReview: IApiResponse) => {
-                    this.store.dispatch(actions.addProduct({ // with ngrx
-                      shoppingCartProduct: {
-                        ...shoppingCartProduct,
-                        product: res,
-                        scoreAverage: resReview.info.average,
-                      },
-                    }));
-                  }
-                });
-              }
-            });
-          });
-        },
-        error: (err) => {
-          console.log('error: ', err);
-        },
-        complete: () => {
-          console.log('fcheck', );
-        }
-      });
-      */
      this.store.dispatch(actions.getAllShoppingCartProducts());
       this.store.select(selectShoppingCart).subscribe((state) => {
-        console.log('this is the state:', state);
         this.shoppingCartProducts = state;
       });
   }

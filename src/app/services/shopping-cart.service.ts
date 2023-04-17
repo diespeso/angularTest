@@ -26,7 +26,12 @@ export class ShoppingCartService {
       .pipe(map((val) => val.data));
   }
 
-  updateShoppingCartProduct(shoppingCartProduct: ShoppingCartProduct): Observable<ShoppingCartProduct> {
+  getFullShoppingCart(): Observable<ShoppingCartProduct[]> {
+    return this.http.get<IApiResponse<ShoppingCartProduct[]>>(`${this.apiURL}?full=true`)
+      .pipe(map((val) => val.data.map((val: ShoppingCartProduct) => (val))))
+  }
+
+  updateShoppingCartProduct(shoppingCartProduct: ShoppingCartProduct): Observable<ShoppingCartProduct> { //TODO: adaptar front
     return this.http.patch<IApiResponse<ShoppingCartProduct>>(`${this.apiURL}/${shoppingCartProduct.id}`, shoppingCartProduct)
       .pipe(map((res: IApiResponse<ShoppingCartProduct>) => {
         return res.data;

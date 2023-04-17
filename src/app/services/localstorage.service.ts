@@ -55,4 +55,14 @@ export class LocalstorageService {
     const currentShoppingCart: ShoppingCartProduct[] = JSON.parse(localStorage.getItem('shopping-cart')!);
     return currentShoppingCart.find((shoppingProduct) => shoppingProduct.product_id === product_id); 
   }
+
+  setJwt(jwt: string) {
+    localStorage.setItem('JWT', jwt);
+  }
+
+  getJwt(): string {
+    const jwt = localStorage.getItem('JWT');
+    if (!jwt) throw new Error('JWT missing');
+    return jwt!;
+  }
 }

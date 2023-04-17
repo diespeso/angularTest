@@ -1,11 +1,11 @@
 <mat-card class="container">
     <div class="image-container">
-        <img src={{this.imageProduct.image.url}} alt="generic alt text">
+        <img src={{this.imageProduct.image?.url}} alt="generic alt text">
     </div>
     <div class="info-container">
         <div><a href="/products/{{this.imageProduct.id}}" target="__blank">{{this.imageProduct.name}}</a></div>
         <div>
-            <span *ngFor="let score of [].constructor(this.shoppingCartProduct.scoreAverage)">⭐</span>
+            <span *ngFor="let score of [].constructor(this.shoppingCartProduct.scoreAverage.toFixed(2))">⭐</span>
         </div>
         <!-- TODO: code reusable from product-view-->
         <mat-form-field [style.width.px]="100">

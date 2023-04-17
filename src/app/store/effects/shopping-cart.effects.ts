@@ -46,31 +46,12 @@ export class ShoppingCartEffects {
     getShoppingCart$ = createEffect(() => this.actions$.pipe(
         ofType(getAllShoppingCartProducts),
         mergeMap((action) => {
-            return this.shoppingCartService.getShoppingCart()
-            .pipe(mergeMap((shopppingCarts: ShoppingCart[]) => {
-                return shopppingCarts.map((shoppingCart: ShoppingCart) => {
-                    return shoppingCart;
-                })
-            }))
-            .pipe(mergeMap((shoppingCart: ShoppingCart) => {
-                return this.productService.getProductWithImage(shoppingCart.product_id).pipe(
-                    mergeMap((product: IProductImage) => {
-                        return this.productReviewService.getProductReviews(shoppingCart.product_id).pipe(
-                            map((productReview: IApiResponse) => ({
-                                    ...shoppingCart,
-                                    product,
-                                    scoreAverage: productReview.info.average,
-                                }
-                            ))
-                        )
-                    })
-                )
-            }))
-            .pipe(reduce((prev: ShoppingCartProduct[], curr) => ([...prev, curr]), [] as ShoppingCartProduct[]))
-            .pipe(map((payload: ShoppingCartProduct[]) => {
-                this.localStorageService.setShoppingCart(payload);
-                return getAllShoppingCartProductsSuccess({ payload });
-            }));
+            return this.shoppingCartService.getFullShoppingCart()
+                .pipe(map((resShoppingCartProduct: ShoppingCartProduct[]) => {
+                    this.localStorageService.setShoppingCart(resShoppingCartProduct);
+                    console.log('testing here', resShoppingCartProduct);
+                    return getAllShoppingCartProductsSuccess({ payload: resShoppingCartProduct });
+                }))
         }),
         catchError((error: any) => {
             return of(getAllShoppingCartProductsFailure({ error }));

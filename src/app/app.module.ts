@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { ProductViewComponent } from './product/product-view/product-view.compon
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButton, MatButtonModule } from '@angular/material/button';
@@ -38,6 +39,11 @@ import { StoreModule } from '@ngrx/store';
 import { shoppingCartReducer } from './store/reducers/shopping-cart.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ShoppingCartEffects } from './store/effects/shopping-cart.effects';
+import { LoginViewComponent } from './login/login-view/login-view.component';
+import { BearertokenInterceptorService } from './services/bearertoken-interceptor.service';
+import { UserConfigViewComponent } from './user/user-config-view/user-config-view.component';
+import { SearchProductComponent } from './search/search-product/search-product.component';
+import { ProductItemSquareComponent } from './product/product-item-square/product-item-square.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +59,10 @@ import { ShoppingCartEffects } from './store/effects/shopping-cart.effects';
     ShoppingCartViewComponent,
     ProductCartItemComponent,
     DialogAddedProductComponent,
+    LoginViewComponent,
+    UserConfigViewComponent,
+    SearchProductComponent,
+    ProductItemSquareComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +78,7 @@ import { ShoppingCartEffects } from './store/effects/shopping-cart.effects';
     MatSelectModule,
     MatSnackBarModule,
     MatCardModule,
+    MatInputModule,
     ScrollingModule,
     ReactiveFormsModule,
     StoreModule.forRoot({
@@ -75,7 +86,7 @@ import { ShoppingCartEffects } from './store/effects/shopping-cart.effects';
     }, {}),
     EffectsModule.forRoot([ShoppingCartEffects]),
   ],
-  providers: [ProductService, HealthCheckerService],
+  providers: [ProductService, HealthCheckerService, { provide: HTTP_INTERCEPTORS, useClass: BearertokenInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

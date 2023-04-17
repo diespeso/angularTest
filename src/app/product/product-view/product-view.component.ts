@@ -87,7 +87,6 @@ export class ProductViewComponent implements OnInit {
 
   canAddToShoppingCart(): boolean {
     const exists = this.localStorageService.getProductFromShoppingCartByProductId(this.product.id!);
-    console.log(exists);
     return  exists === undefined;
   }
 

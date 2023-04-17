@@ -1,7 +1,7 @@
 <mat-card>
     <h3>{{this.review.title}}</h3>
     <mat-card-content>
-        <h3>{{this.review.score}}</h3>
+        <span *ngFor="let _ of [].constructor(this.review.score)">✰</span>
         <div>
             {{this.review.content}}
         </div>

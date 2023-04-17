@@ -1,0 +1,24 @@
+
+<div class="search-view">
+    <div class="search-bar">
+        <mat-card>
+            <h2>Search product</h2>
+            <mat-form-field>
+                <mat-label>testing here</mat-label>
+                <input matInput [(ngModel)]="likeNameInput">
+            </mat-form-field>
+            <h2>Search by category</h2>
+            <div>
+                <div><a href="#">toys</a></div>
+                <div><a href="#">technology</a></div>
+            </div>
+            <br>
+                <button mat-raised-button (click)="onSearch()">Search</button>
+        </mat-card>
+    </div>
+    <div class="search-result">
+        <mat-card>
+            <app-product-item *ngFor="let iproduct of this.products" [product]="iproduct"></app-product-item>
+        </mat-card>
+    </div>
+</div>

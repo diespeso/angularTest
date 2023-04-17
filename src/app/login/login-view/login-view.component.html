@@ -1,0 +1,15 @@
+<div>
+    <mat-card>
+        <form>
+            <div class="form-row">
+                <label>E-mail</label>
+                <input type="email" [(ngModel)]="email" name="email">
+            </div>
+            <div class="form-row">
+                <label>Password</label>
+                <input type="password" [(ngModel)]="password" name="password">
+            </div>
+            <button (click)="handleLogin()">Log-in</button>
+        </form>
+    </mat-card>
+</div>

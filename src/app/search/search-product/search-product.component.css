@@ -1,0 +1,22 @@
+.search-view {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-areas: 
+    "a a b b b b b b"
+    "a a b b b b b b"
+    "a a b b b b b b"
+    "a a b b b b b b"
+    "a a b b b b b b";
+}
+
+.search-bar mat-card {
+    grid-area: "a";
+    height: 100vh;
+}
+
+.search-result mat-card {
+    grid-area: "b";
+    height: 100vh;
+}

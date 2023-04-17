@@ -24,10 +24,12 @@ export class ProductCartItemComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
   ) {
+    console.log('score:', this.shoppingCartProduct);
   }
 
   ngOnInit(): void {
     this.imageProduct = this.shoppingCartProduct.product;
+    console.log('printing inside product card:', this.shoppingCartProduct);
     this.editAmount = this.shoppingCartProduct.amount;
     this.maxSelectableAmount = 30;
   }
